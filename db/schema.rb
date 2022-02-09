@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_27_001121) do
+ActiveRecord::Schema.define(version: 2022_02_07_152638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,21 @@ ActiveRecord::Schema.define(version: 2022_01_27_001121) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "address1"
+    t.string "address2"
+    t.string "city"
+    t.string "province"
+    t.string "country"
+    t.string "zip"
+    t.string "company"
+    t.string "phone"
+    t.boolean "is_default", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -54,6 +69,15 @@ ActiveRecord::Schema.define(version: 2022_01_27_001121) do
     t.index ["user_id"], name: "index_haircuts_on_user_id"
   end
 
+  create_table "shopify_store_accesses", force: :cascade do |t|
+    t.string "store_name"
+    t.string "code"
+    t.string "admin_access_token"
+    t.string "storefront_access_token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -65,6 +89,7 @@ ActiveRecord::Schema.define(version: 2022_01_27_001121) do
     t.string "reset_password_token"
     t.string "refresh_token"
     t.string "password_digest"
+    t.integer "haircuts_count"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
