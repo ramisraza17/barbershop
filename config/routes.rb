@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       post 'auth/refresh', to: 'authentication#refresh'
       resources :user, only: [:index]
 
+      resources :payment_methods
       resources :subscriptions do
         collection do
           get "selling_plan_groups"
