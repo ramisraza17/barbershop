@@ -1,2 +1,0 @@
-class ShopifyStoreAccess < ApplicationRecord
-end
